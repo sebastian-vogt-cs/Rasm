@@ -1,5 +1,5 @@
 [package]
-name = "Rasm"
+name = "rasm"
 version = "0.1.0"
 authors = ["vogt-sebastian"]
 
