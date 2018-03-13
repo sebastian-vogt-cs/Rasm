@@ -1,0 +1,6 @@
+[package]
+name = "Rasm"
+version = "0.1.0"
+authors = ["vogt-sebastian"]
+
+[dependencies]
