@@ -1,20 +1,32 @@
-mod register_machine;
-use register_machine::RegisterMachine;
-use register_machine::Command;
+mod controller;
+use controller::Controller;
+use controller::register_machine::Command;
 
 fn main() {
-    let commands = [Command::DLOAD(10), Command::STORE(1), Command::DLOAD(0), Command::STORE(2), Command::DLOAD(1), Command::STORE(3), Command::DLOAD(0),
+
+    //these commands are the programm we want to simulate
+    let commands = vec![Command::DLOAD(10), Command::STORE(1), Command::DLOAD(0), Command::STORE(2), Command::DLOAD(1), Command::STORE(3), Command::DLOAD(0),
                     Command::STORE(4), Command::DLOAD(1), Command::STORE(5), Command::SUB(1), Command::JGT(23), Command::LOAD(3), Command::STORE(4),
                     Command::LOAD(2), Command::STORE(3), Command::ADD(4), Command::STORE(2), Command::DLOAD(1), Command::ADD(5), Command::STORE(5),
                     Command::JUMP(11), Command::LOAD(2), Command::END];
 
-    let mut machine = RegisterMachine::new();
+    //initiale new controller
+    let mut controller = Controller::new(commands);
+    
+    //use function "next_step" for full controll over the machine (doesn' make sense here but will in the UI)
     loop{
-        let counter = commands[machine.get_instruction_counter() - 1];
-        machine.run(counter);
-        if counter == Command::END{
+        //the function next_step returns the register_machine in the current state and a boolean to indicate the END command.
+        let (new_state, end) = controller.next_step();
+        if !end {
+            println!("The next state of the accumulator is: {}", new_state.get_accumulator());
+        }else {
+            println!("We reached the end, all fields of the machine have been retet to: {}", new_state.get_accumulator());
             break;
         }
     }
+
+    //the function "run" runs the whole code at once and returns the end state of the machine
+    let last_state = controller.run();
+    println!("\nThis time we let it all run through at once. last state of the accumulator is: {}", last_state.get_accumulator());
 
 }
