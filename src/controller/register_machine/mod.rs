@@ -67,7 +67,7 @@ impl RegisterMachine{
         }
     }
 
-    pub fn run(&mut self, command: Command){
+    pub fn run(&mut self, command: Command) {
         match command{
             Command::LOAD(i)   => self.load(i),
             Command::DLOAD(i)  => self.d_load(i),
@@ -87,8 +87,16 @@ impl RegisterMachine{
         }
     }
 
-    pub fn get_instruction_counter(&self) -> usize{
+    pub fn get_instruction_counter(&self) -> usize {
         self.instuction_counter.value as usize
+    }
+
+    pub fn get_accumulator(&self) -> isize {
+        self.accumulator.value
+    }
+
+    pub fn get_registers(&self) -> [Register; 16] {
+        self.data_registers
     }
 
     fn load(&mut self, n: u8) {
@@ -197,7 +205,6 @@ impl RegisterMachine{
     }
 
     fn end(&mut self) {
-        println!("accumulator: {}", self.accumulator.value);
         self.accumulator.value = 0;
         self.instuction_counter.value = 1;
         for i in 0..self.data_registers.len(){
