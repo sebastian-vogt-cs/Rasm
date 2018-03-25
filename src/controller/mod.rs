@@ -1,6 +1,5 @@
-pub mod register_machine;
-use self::register_machine::RegisterMachine;
-use self::register_machine::Command;
+use register_machine::RegisterMachine;
+use register_machine::Command;
 
 
 pub struct Controller {

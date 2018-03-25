@@ -1,9 +1,48 @@
 mod controller;
+mod register_machine;
 use controller::Controller;
-use controller::register_machine::Command;
+mod parser;
+
 
 fn main() {
 
+    //you can now parse a String to commands! The example in the comment below makes it the "old fashioned" way
+    let commands = parser::parse(
+                                    "DLOAD 10 -- some command
+                                    STORE 1 -- comands work!
+                                    DLOAD 0
+                                    STORE 2
+                                    DLOAD 1
+                                    STORE 3
+                                    DLOAD 0
+                                    STORE 4
+                                    DLOAD 1
+                                    STORE 5
+                                    SUB 1
+                                    JGT 23
+                                    LOAD 3
+                                    STORE 4
+                                    LOAD 2
+                                    STORE 3
+                                    ADD 4
+                                    STORE 2
+                                    DLOAD 1
+                                    ADD 5
+                                    STORE 5
+                                    JUMP 11
+                                    LOAD 2
+                                    END"
+                                );
+
+    if commands.0 {
+        let mut controller = Controller::new(commands.1);
+        let last_state = controller.run();
+        println!("\nThis time we let it all run through at once. last state of the accumulator is: {}", last_state.get_accumulator());
+    } else {
+        println!("Error");
+    }
+
+    /*
     //these commands are the programm we want to simulate
     let commands = vec![Command::DLOAD(10), Command::STORE(1), Command::DLOAD(0), Command::STORE(2), Command::DLOAD(1), Command::STORE(3), Command::DLOAD(0),
                     Command::STORE(4), Command::DLOAD(1), Command::STORE(5), Command::SUB(1), Command::JGT(23), Command::LOAD(3), Command::STORE(4),
@@ -28,5 +67,6 @@ fn main() {
     //the function "run" runs the whole code at once and returns the end state of the machine
     let last_state = controller.run();
     println!("\nThis time we let it all run through at once. last state of the accumulator is: {}", last_state.get_accumulator());
+    */
 
 }
