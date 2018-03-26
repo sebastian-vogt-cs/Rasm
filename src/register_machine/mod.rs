@@ -28,7 +28,7 @@ pub struct Register {
 pub struct RegisterMachine {
     accumulator: Register,
     instuction_counter: Register,
-    data_registers: [Register; 16],
+    data_registers: [Register; 15],
 }
 
 
@@ -50,6 +50,10 @@ impl Register {
         self.value = self.value / n;
     }
 
+    fn get_value(&self) -> isize {
+        self.value
+    }
+
 }
 
 
@@ -63,7 +67,7 @@ impl RegisterMachine{
             instuction_counter: Register {
                 value: 1,
             },
-            data_registers: [Register{value: 0,}; 16],
+            data_registers: [Register{value: 0,}; 15],
         }
     }
 
@@ -95,8 +99,32 @@ impl RegisterMachine{
         self.accumulator.value
     }
 
-    pub fn get_registers(&self) -> [Register; 16] {
+    pub fn get_registers(&self) -> [Register; 15] {
         self.data_registers
+    }
+
+    pub fn get_registers_to_string(&self) -> [String; 17] {
+        let mut stry = String::new();
+        let mut ret_str: [String; 17] = [" ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string(), " ".to_string()];
+        stry.push_str("Accumulator: ");
+        stry.push_str(&self.get_accumulator().to_string());
+        ret_str[0] = stry;
+        stry = String::new();
+        stry.push_str("Instruction counter: ");
+        stry.push_str(&self.get_instruction_counter().to_string());
+        ret_str[1] = stry;
+        let registers = self.get_registers();
+        let mut i = 0;
+        for register in registers.iter() {
+            stry = String::new();
+            stry.push_str("R");
+            stry.push_str(&i.to_string());
+            stry.push_str(": ");
+            stry.push_str(&register.get_value().to_string());
+            ret_str[2 + i] = stry;
+            i += 1;
+        }
+        ret_str
     }
 
     fn load(&mut self, n: u8) {

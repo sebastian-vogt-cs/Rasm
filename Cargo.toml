@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["vogt-sebastian"]
 
 [dependencies]
+iui = "0.2"

@@ -2,7 +2,7 @@ mod controller;
 mod register_machine;
 use controller::Controller;
 mod parser;
-
+mod ui;
 
 fn main() {
 
@@ -68,5 +68,5 @@ fn main() {
     let last_state = controller.run();
     println!("\nThis time we let it all run through at once. last state of the accumulator is: {}", last_state.get_accumulator());
     */
-
+    ui::init();
 }
