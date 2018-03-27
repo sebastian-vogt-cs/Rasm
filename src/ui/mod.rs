@@ -35,65 +35,65 @@ pub fn init() {
     // Create a new label. Note that labels don't auto-wrap!
     let mut label_text = String::new();
     label_text.push_str("Type your program here");
-    let mut label = Label::new(&ui, &label_text);
+    let label = Label::new(&ui, &label_text);
 
-    let mut entry = MultilineEntry::new(&ui);
+    let entry = MultilineEntry::new(&ui);
 
-    let mut separator = HorizontalSeparator::new(&ui);
+    let separator = HorizontalSeparator::new(&ui);
 
     let mut button = Button::new(&ui, "run");
 
     label_text = String::new();
     label_text.push_str("accumulator");
-    let mut label_1_1 = Label::new(&ui, &label_text);
+    let label_1_1 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("instriuction_counter");
-    let mut label_1_2 = Label::new(&ui, &label_text);
+    let label_1_2 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R0");
-    let mut label_2_1 = Label::new(&ui, &label_text);
+    let label_2_1 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R1");
-    let mut label_2_2 = Label::new(&ui, &label_text);
+    let label_2_2 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R2");
-    let mut label_2_3 = Label::new(&ui, &label_text);
+    let label_2_3 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R3");
-    let mut label_3_1 = Label::new(&ui, &label_text);
+    let label_3_1 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R4");
-    let mut label_3_2 = Label::new(&ui, &label_text);
+    let label_3_2 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R5");
-    let mut label_3_3 = Label::new(&ui, &label_text);
+    let label_3_3 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R6");
-    let mut label_4_1 = Label::new(&ui, &label_text);
+    let label_4_1 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R7");
-    let mut label_4_2 = Label::new(&ui, &label_text);
+    let label_4_2 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R8");
-    let mut label_4_3 = Label::new(&ui, &label_text);
+    let label_4_3 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R9");
-    let mut label_5_1 = Label::new(&ui, &label_text);
+    let label_5_1 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R10");
-    let mut label_5_2 = Label::new(&ui, &label_text);
+    let label_5_2 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R11");
-    let mut label_5_3 = Label::new(&ui, &label_text);
+    let label_5_3 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R12");
-    let mut label_6_1 = Label::new(&ui, &label_text);
+    let label_6_1 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R13");
-    let mut label_6_2 = Label::new(&ui, &label_text);
+    let label_6_2 = Label::new(&ui, &label_text);
     label_text = String::new();
     label_text.push_str("R14");
-    let mut label_6_3 = Label::new(&ui, &label_text);
+    let label_6_3 = Label::new(&ui, &label_text);
 
     button.on_clicked(&ui, {
         let ui = ui.clone();
@@ -114,7 +114,7 @@ pub fn init() {
         let mut label_6_1 = label_6_1.clone();
         let mut label_6_2 = label_6_2.clone();
         let mut label_6_3 = label_6_3.clone();
-        let mut entry = entry.clone();
+        let entry = entry.clone();
         move |_| {
             label_1_1.set_text(&ui, "successfully clicked");
             let text = entry.value(&ui);

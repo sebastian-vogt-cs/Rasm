@@ -70,3 +70,46 @@ fn main() {
     */
     ui::init();
 }
+
+
+
+#[cfg(test)]
+mod tests {
+    use controller::Controller;
+    use parser;
+    #[test]
+    fn it_works() {
+        let commands = parser::parse(
+                                    "DLOAD 10 -- some command
+                                    STORE 1 -- comands work!
+                                    DLOAD 0
+                                    STORE 2
+                                    DLOAD 1
+                                    STORE 3
+                                    DLOAD 0
+                                    STORE 4
+                                    DLOAD 1
+                                    STORE 5
+                                    SUB 1
+                                    JGT 23
+                                    LOAD 3
+                                    STORE 4
+                                    LOAD 2
+                                    STORE 3
+                                    ADD 4
+                                    STORE 2
+                                    DLOAD 1
+                                    ADD 5
+                                    STORE 5
+                                    JUMP 11
+                                    LOAD 2
+                                    END"
+                                );
+
+        
+        let mut controller = Controller::new(commands.1);
+        let last_state = controller.run();
+        assert_eq!(last_state.get_accumulator(), 55);
+        assert_eq!(last_state.get_instruction_counter(), 24);
+    }
+}
